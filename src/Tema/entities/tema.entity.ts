@@ -1,5 +1,6 @@
 import { IsNotEmpty, MaxLength } from "class-validator";
-import {Entity, PrimaryGeneratedColumn,Column,ManyToOne} from "typeorm";
+import { Postagem } from "src/Postagem/entities/postagem.entity";
+import {Entity, PrimaryGeneratedColumn,Column,OneToMany} from "typeorm";
 
 @Entity({name: "tb_tema"})
     export class Tema{
@@ -19,4 +20,6 @@ import {Entity, PrimaryGeneratedColumn,Column,ManyToOne} from "typeorm";
         @Column({length:100, nullable:false})
         descricao:string
 
+        @OneToMany(() => Postagem, (Postagem) => Postagem.tema)
+        postagem: Postagem[]
     }
