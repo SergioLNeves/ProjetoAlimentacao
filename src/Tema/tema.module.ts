@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { TemaController } from "./controller/tema.controllers";
+import { TemaController } from "./controller/tema.controller";
 import { Tema } from "./entities/tema.entity";
 import { TemaService } from "./service/tema.service";
 
@@ -8,7 +8,6 @@ import { TemaService } from "./service/tema.service";
     imports: [TypeOrmModule.forFeature([Tema])],
     providers: [TemaService],
     controllers: [TemaController],
-    exports: [TypeOrmModule],
+    exports: [TypeOrmModule]
 })
-
-export class TemaModule{ }
+    export class TemaModule {}

@@ -1,25 +1,26 @@
-import { IsNotEmpty, MaxLength } from "class-validator";
-import { Postagem } from "src/Postagem/entities/postagem.entity";
-import {Entity, PrimaryGeneratedColumn,Column,OneToMany} from "typeorm";
+import { IsNotEmpty } from "class-validator";
+import { Postagem } from "src/postagem/entities/postagem.entity";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryColumnCannotBeNullableError, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: "tb_tema"})
-    export class Tema{
+@Entity({name: "tb_temas"})
+export class Tema {
 
-//PrimaryKey
-        @PrimaryGeneratedColumn()
-        id:number
+    @PrimaryGeneratedColumn()
+    id: number
 
-//
-        @IsNotEmpty()
-        @MaxLength(50)
-        @Column({length:50, nullable:false})
-        temaPrincipal:string
+    @IsNotEmpty()
+    @Column({length: 50, nullable: false})
+    temaPrincipal: string
 
-        @IsNotEmpty()
-        @MaxLength(100)
-        @Column({length:100, nullable:false})
-        descricao:string
+    @IsNotEmpty()
+    @Column({length: 255, nullable:false})
+    descricao: string
+    
+    @OneToMany(() => Postagem, (postagem) => postagem.tema, {
+        onDelete: "CASCADE"
+    })
+    postagem: Postagem
 
-        @OneToMany(() => Postagem, (Postagem) => Postagem.tema)
-        postagem: Postagem[]
-    }
+
+    
+}

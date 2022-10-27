@@ -1,38 +1,29 @@
-import { IsNotEmpty, MaxLength, MinLength } from "class-validator";
-import { Postagem } from "src/Postagem/entities/postagem.entity";
-import{Entity, PrimaryGeneratedColumn, Column,OneToMany} from "typeorm";
+import { IsEmail, IsNotEmpty, MinLength } from "class-validator";
+import { Postagem } from "src/postagem/entities/postagem.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: "tb_usuario"})
-    export class Usuario{
+@Entity({name: "tb_usuarios"})
+export class Usuario {
 
-        @PrimaryGeneratedColumn()
-        id: number
+    @PrimaryGeneratedColumn()
+    id: number
 
-        @IsNotEmpty()
-        @MaxLength(50)
-        @Column({length: 80, nullable:false})
-        nome: string
+    @IsNotEmpty()
+    @Column({length: 255, nullable: false})
+    nome: string
 
-        @IsNotEmpty()
-        @MaxLength(40)
-        @Column({length: 40, nullable:false,unique:true})
-        email: string
+    @IsEmail()
+    @Column({length: 255, nullable: false})
+    usuario: string //e-mail
 
-        @IsNotEmpty()
-        @MaxLength(20)
-        @Column({length:20,nullable:false,unique:true})
-        nick:string
+    @IsNotEmpty()
+    @MinLength(8)
+    @Column({length: 255, nullable: false})
+    senha: string
 
-        @IsNotEmpty()
-        @MinLength(6)
-        @MaxLength(20)
-        @Column({length: 20, nullable:false})
-        senha: string
+    @Column({length: 5000, nullable: false})
+    foto: string
 
-        @MaxLength(8000)
-        @Column({length: 8000,nullable:true})
-        foto: string
-
-        @OneToMany(() => Postagem, (Postagem) => Postagem.usuario)
-        postagem: Postagem[]
-    }
+    @OneToMany(() => Postagem, (postagem) => postagem.usuario)
+    postagem: Postagem[]
+}

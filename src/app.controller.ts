@@ -9,4 +9,12 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+  @Get('/BSM')
+  getBSM(): string {
+    return this.appService.getBSM();
+  }
+  @Get('/ObjAp')
+  getObjdeAprendizagem(): string {
+    return this.appService.getObjdeAprendizagem();
+  }
 }
